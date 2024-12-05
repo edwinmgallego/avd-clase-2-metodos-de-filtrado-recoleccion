@@ -21,12 +21,12 @@
 #Q3 sería 31 (el valor en el 75%).
 #Entonces, el IQR sería $$31 - 11 = 20$$.
 #El IQR es una medida robusta porque no se ve afectada por valores extremos, a diferencia del rango total. ¿Te gustaría saber más sobre cómo aplicar el IQR en tus análisis de datos?
-
 import numpy as np
-import pandas as pd  # Asegúrate de importar pandas
+import pandas as pd
+import matplotlib.pyplot as plt
 
 # Crear datos
-data = {'Valores': [10, 12, 15, 1000]}
+data = {'Valores': [10, 12, 15, 1000, 2000, 4000, 2500]}
 df = pd.DataFrame(data)
 
 # Calcular rango intercuartil (IQR)
@@ -36,7 +36,20 @@ iqr = q3 - q1
 
 # Filtrar outliers
 df_filtrado = df[(df['Valores'] >= q1 - 1.5 * iqr) & (df['Valores'] <= q3 + 1.5 * iqr)]
-print(df_filtrado)
 
+# Graficar el dataset original con outliers
+plt.figure(figsize=(12, 6))
 
+plt.subplot(1, 2, 1)
+plt.boxplot(df['Valores'])
+plt.title('Dataset con Outliers')
+plt.ylabel('Valores')
 
+# Graficar el dataset corregido sin outliers
+plt.subplot(1, 2, 2)
+plt.boxplot(df_filtrado['Valores'])
+plt.title('Dataset Corregido (Sin Outliers)')
+plt.ylabel('Valores')
+
+plt.tight_layout()
+plt.show()
