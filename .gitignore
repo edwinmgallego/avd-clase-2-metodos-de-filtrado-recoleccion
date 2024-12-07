@@ -1,1 +1,5 @@
 dataset
+*.csv
+# Ignorar archivos de Excel
+*.xls
+*.xlsx
